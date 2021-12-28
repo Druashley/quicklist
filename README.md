@@ -1,3 +1,3 @@
 Quick List is built with typescript
 
-Link to demo:
+Link to demo: https://Druashley.github.io/quicklist
