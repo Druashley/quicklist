@@ -5,7 +5,7 @@ export const StyledCreateList = styled.div`
   justify-content: center;
   background-color: #352f44;
   color: #dbd8e3;
-  padding: 3rem 0;
+  padding: 1.25rem 0;
 
   input {
     padding: 0.5rem;

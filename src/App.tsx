@@ -29,7 +29,7 @@ const App: React.FC = () => {
 
   const handleListName = (e: React.ChangeEvent<HTMLInputElement>) => {
     // Sets the new list in the CreateList Component.
-    setNewListName(e.target.value);
+    setNewListName(e.target.value.trim());
   };
   const createList = (e: React.MouseEvent<HTMLButtonElement>): void => {
     // Button inside the CreateList Componet - When clicked - creates a new list with no items. Math.random is being used for ID atm.
@@ -59,6 +59,7 @@ const App: React.FC = () => {
       {activeList && (
         <ActiveList
           activeList={activeList}
+          setActiveList={setActiveList}
           allLists={allLists}
           setAllLists={setAllLists}
         />

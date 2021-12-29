@@ -1,19 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { List } from "../App";
+import { StyledActiveList } from "./styles/ActiveList.style";
+import { Container } from "./styles/Container.styled";
 
 interface Props {
   activeList: number | undefined;
+  setActiveList: React.Dispatch<React.SetStateAction<number | undefined>>;
   setAllLists: React.Dispatch<React.SetStateAction<List[]>>;
   allLists: List[];
 }
 
-const ActiveList: React.FC<Props> = ({ activeList, allLists, setAllLists }) => {
+const ActiveList: React.FC<Props> = ({
+  activeList,
+  setActiveList,
+  allLists,
+  setAllLists,
+}) => {
   const [currentList, setcurrentList] = useState<List>();
+  const [deletePrompt, setDeletePrompt] = useState<boolean>(false);
 
   useEffect(() => {
     let index = allLists.findIndex((list: List) => list.id === activeList);
     let correctList: List = allLists[index];
-
+    setDeletePrompt(false);
     if (activeList) {
       setcurrentList(correctList);
     }
@@ -37,20 +46,44 @@ const ActiveList: React.FC<Props> = ({ activeList, allLists, setAllLists }) => {
         return list;
       }
     });
-
     setAllLists(newLists);
   };
 
+  const removeList = (id: number): void => {
+    const newLists = allLists.filter((list) => list.id !== id);
+    setAllLists(newLists);
+    setDeletePrompt(false);
+    setActiveList(undefined);
+  };
+
+  const confirmDelete = (id: number): JSX.Element => {
+    return (
+      <div>
+        <button className="confirm" onClick={() => removeList(id)}>
+          Delete List
+        </button>
+        <button className="deny" onClick={() => setDeletePrompt(false)}>
+          Don't Delete List
+        </button>
+      </div>
+    );
+  };
+
   return (
-    <div>
+    <StyledActiveList>
       {currentList && (
-        <div>
-          <div>current list name: {currentList.name}</div>
+        <Container>
+          <h1>
+            <span onClick={() => setDeletePrompt(true)}>
+              {currentList.name}
+            </span>
+            {deletePrompt && confirmDelete(currentList.id)}
+          </h1>
           <div>
             <ul>
               {currentList.items.map((item) => (
                 <li key={item.id}>
-                  <div>{item.name}</div>
+                  <div className="name">{item.name}</div>
                   <button value={item.id} onClick={() => removeItem(item.id)}>
                     X
                   </button>
@@ -58,9 +91,9 @@ const ActiveList: React.FC<Props> = ({ activeList, allLists, setAllLists }) => {
               ))}
             </ul>
           </div>
-        </div>
+        </Container>
       )}
-    </div>
+    </StyledActiveList>
   );
 };
 

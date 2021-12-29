@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { List, Item } from "../App";
+import { StyledCreateList as StyledCreateItem } from "./styles/CreateList.styles";
 
 interface Props {
   activeList: number | undefined;
@@ -16,7 +17,7 @@ const AddItem: React.FC<Props> = ({
   const [newItem, setNewItem] = useState<string>("");
 
   const handleNamechange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewItem(e.target.value);
+    setNewItem(e.target.value.trim());
   };
 
   const addItemToList = () => {
@@ -52,11 +53,10 @@ const AddItem: React.FC<Props> = ({
     setAllLists(newLists);
     setNewItem("");
   };
-
   return (
-    <div>
+    <>
       {activeList && (
-        <div>
+        <StyledCreateItem>
           <input
             type="text"
             placeholder="Add to list..."
@@ -64,9 +64,9 @@ const AddItem: React.FC<Props> = ({
             onChange={handleNamechange}
           />
           <button onClick={addItemToList}>Add</button>
-        </div>
+        </StyledCreateItem>
       )}
-    </div>
+    </>
   );
 };
 
