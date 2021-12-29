@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import AddItem from "./AddItem";
 import { List } from "../App";
 import { StyledActiveList } from "./styles/ActiveList.style";
 import { Container } from "./styles/Container.styled";
@@ -39,7 +40,7 @@ const ActiveList: React.FC<Props> = ({
     };
     // allLists.filter((list) => list.id !== id);
     setcurrentList(updatedList);
-    let newLists = allLists.map((list) => {
+    let newLists: List[] = allLists.map((list) => {
       if (list.id === updatedList.id) {
         return updatedList;
       } else {
@@ -79,6 +80,11 @@ const ActiveList: React.FC<Props> = ({
             </span>
             {deletePrompt && confirmDelete(currentList.id)}
           </h1>
+          <AddItem
+            activeList={activeList}
+            allLists={allLists}
+            setAllLists={setAllLists}
+          />
           <div>
             <ul>
               {currentList.items.map((item) => (

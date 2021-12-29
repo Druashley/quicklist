@@ -7,6 +7,8 @@ export const StyledActiveList = styled.div`
     font-size: 3rem;
     text-align: center;
     color: #fff;
+    padding-bottom: 0;
+    margin-bottom: 0;
   }
 
   ul {
@@ -37,7 +39,7 @@ export const StyledActiveList = styled.div`
   span {
     cursor: pointer;
     &:hover {
-      font-size: 2.75rem;
+      color: #e6c6f3;
       opacity: 0.9;
     }
   }
@@ -50,6 +52,7 @@ export const StyledActiveList = styled.div`
     cursor: pointer;
     &:hover {
       background-color: #6f6781;
+      color: #fff;
       opacity: 0.9;
       transform: scale(0.95);
     }

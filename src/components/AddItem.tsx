@@ -17,7 +17,7 @@ const AddItem: React.FC<Props> = ({
   const [newItem, setNewItem] = useState<string>("");
 
   const handleNamechange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewItem(e.target.value.trim());
+    setNewItem(e.target.value);
   };
 
   const addItemToList = () => {
@@ -35,7 +35,7 @@ const AddItem: React.FC<Props> = ({
     // set the new list newItem value with an ID
     let item: Item = {
       id: Math.random(),
-      name: newItem,
+      name: newItem.trim(),
     };
     // push the newItem to the correctList copy
     correctList.items.push(item);
