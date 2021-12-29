@@ -3,13 +3,14 @@ import React, { useState, useEffect } from "react";
 //Components
 import CreateList from "./components/CreateList";
 import ListsMenu from "./components/ListsMenu";
-import AddItem from "./components/AddItem";
 import ActiveList from "./components/ActiveList";
+import Error from "./components/Error";
 
 import { saveLocalLists, getLocalLists } from "./storage";
 // Styles
 import { GlobalStyle } from "./components/styles/Global.styles";
 import { StyledLogo } from "./components/styles/Logo.styled";
+import { Flex } from "./components/styles/Flex.styled";
 
 export interface Item {
   id: number;
@@ -26,20 +27,26 @@ const App: React.FC = () => {
   const [newListName, setNewListName] = useState<string>("");
   const [allLists, setAllLists] = useState<List[]>([]);
   const [activeList, setActiveList] = useState<number>();
+  const [error, setError] = useState<boolean>(false);
 
   const handleListName = (e: React.ChangeEvent<HTMLInputElement>) => {
     // Sets the new list in the CreateList Component.
     setNewListName(e.target.value);
   };
-  const createList = (e: React.MouseEvent<HTMLButtonElement>): void => {
+  const createList = (): void => {
     // Button inside the CreateList Componet - When clicked - creates a new list with no items. Math.random is being used for ID atm.
-    let newList: List = {
-      id: Math.random(),
-      name: newListName.trim(),
-      items: [],
-    };
-    setAllLists([...allLists, newList]);
-    setNewListName("");
+    if (newListName.length === 0) {
+      setError(true);
+    } else {
+      setError(false);
+      let newList: List = {
+        id: Math.random(),
+        name: newListName.trim(),
+        items: [],
+      };
+      setAllLists([...allLists, newList]);
+      setNewListName("");
+    }
   };
   useEffect(() => {
     // at the start of the app running grabs all local storage lists
@@ -60,6 +67,16 @@ const App: React.FC = () => {
         createList={createList}
         newListName={newListName}
       />
+
+      {error && (
+        <Flex>
+          <Error
+            label="Lists must have at least one character."
+            setError={setError}
+          />
+        </Flex>
+      )}
+
       <ListsMenu allLists={allLists} setActiveList={setActiveList} />
 
       {activeList && (
