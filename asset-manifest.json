@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.js": "/quicklist/static/js/main.b9ba79db.js",
+    "main.js": "/quicklist/static/js/main.b7e6a9d8.js",
     "static/js/787.b7f02b4c.chunk.js": "/quicklist/static/js/787.b7f02b4c.chunk.js",
     "index.html": "/quicklist/index.html",
-    "main.b9ba79db.js.map": "/quicklist/static/js/main.b9ba79db.js.map",
+    "main.b7e6a9d8.js.map": "/quicklist/static/js/main.b7e6a9d8.js.map",
     "787.b7f02b4c.chunk.js.map": "/quicklist/static/js/787.b7f02b4c.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.b9ba79db.js"
+    "static/js/main.b7e6a9d8.js"
   ]
 }
